@@ -2,6 +2,7 @@ const https = require('https');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const fs = require('fs');
+const { Parser } = require('json2csv');
 let shop = [];
 
 https.get('https://peraichi.com/landing_pages/view/toyonaka2020ouen', res => {
@@ -35,6 +36,10 @@ https.get('https://peraichi.com/landing_pages/view/toyonaka2020ouen', res => {
       shop.push({"name":name,"genre":genre,"menu":menu,"address":address,"phone":phone,"update":update})
     })
     fs.writeFileSync('./toyonaka2020ouen.json', JSON.stringify(shop,null,'\t'));
+    const fields = ['name','genre','menu','address','phone','update'];
+    const parser = new Parser(fields);
+    const csv = parser.parse(shop);
+    fs.writeFileSync('./toyonaka2020ouen.csv', csv, 'utf-8');
     //console.log(shop);
   });
 })

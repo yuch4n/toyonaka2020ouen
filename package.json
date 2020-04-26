@@ -1,14 +1,15 @@
 {
   "name": "toyonaka2020ouen",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "toyonaka2020ouen.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yuch4n",
   "license": "ISC",
   "dependencies": {
-    "jsdom": "^16.2.2"
+    "jsdom": "^16.2.2",
+    "json2csv": "^5.0.0"
   }
 }

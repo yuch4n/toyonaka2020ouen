@@ -24,7 +24,7 @@ https.get('https://peraichi.com/landing_pages/view/toyonaka2020ouen', res => {
 
       let info = el.querySelectorAll('.col-sm .pera1-editable')[1].innerHTML;
       // 住所
-      let address = (m = info.match(/(豊中市.*?)<br>/)) ? m[1].replace(/\s$/g,'') : '';
+      let address = (m = info.match(/(豊中市.*?)<br>/)) ? m[1].replace(/\s$/g,'').replace(/^/,'大阪府') : '';
 
       // 電話番号
       let phone = (m = info.match(/<a href="tel:.*?>([0-9-\s]*)<\/a>/)) ? m[1].replace(/\s/g,'') : '';

@@ -38,7 +38,13 @@ https.get('https://peraichi.com/landing_pages/view/toyonaka2020ouen', res => {
     fs.writeFileSync('./toyonaka2020ouen.json', JSON.stringify(shop,null,'\t'));
     const fields = ['name','genre','menu','address','phone','update'];
     const parser = new Parser(fields);
-    const csv = parser.parse(shop);
+    let csv = parser.parse(shop);
+    csv = csv.replace(/<\/?p>/g,'').replace(/<\/?strong>/g,'').replace(/<\/?span.*?>/g,'');
+    csv.match(/<a\s.*>.*<\/a>/g).forEach(m=> {
+      let href = m.replace(/<a\shref="?"(.*?)"?".*?<\/a>/,'$1');
+      csv = csv.replace(m, ' '+href+' ');
+    });
+    csv = csv.replace(/<br>/g, '\n');
     fs.writeFileSync('./toyonaka2020ouen.csv', csv, 'utf-8');
     //console.log(shop);
   });
